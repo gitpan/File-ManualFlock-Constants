@@ -5,7 +5,7 @@ package File::ManualFlock::Constants;
 # Version Info                         #
 #===================================================================#
 
-$File::ManualFlock::Constants::VERSION = '1.0.0';
+$File::ManualFlock::Constants::VERSION = '1.03';
 
 #======================================#
 # Dependencies                         #
@@ -28,12 +28,6 @@ use vars qw(@ISA @EXPORT %EXPORT_TAGS);
 
 require Exporter;
 @ISA = qw(Exporter);
-
-#======================================#
-# Public Methods                       #
-#===================================================================#
-
-#@ISA = qw(Exporter);
 
 # Items to export into callers namespace by default
 @EXPORT = qw( LOCK_SH 
@@ -58,10 +52,15 @@ require Exporter;
                                    MFL_O_RDWR MFL_O_NONBLOCK MFL_O_BINARY)]
                );
 
-sub import
-{ 
-  File::ManualFlock::Constants->export_to_level(1, @_); 
-  File::ManualFlock::Constants->export_to_level(2, @_); 
+#======================================#
+# Public Methods                       #
+#===================================================================#
+
+sub export_to_pkg
+{
+      my $pkg = shift;
+      my $to_pkg = shift;
+      $pkg->export($to_pkg, @_);
 }
 
 #--------------------------------------#
